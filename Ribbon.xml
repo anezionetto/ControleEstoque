@@ -1,0 +1,158 @@
+﻿<customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui"
+onLoad="fncRibbon" loadImage="fncLoadImage">
+
+<!-- *** TAG COMMANDS  ***-->
+<commands>
+<command idMso="ApplicationOptionsDialog" enabled = "false"/>
+<command idMso="FileExit" enabled = "false"/>
+<command idMso="Help" enabled = "false"/>
+</commands>
+
+<ribbon startFromScratch="false">
+<!-- *** Quick Access Toolbar  ***-->
+<qat>
+  <documentControls>
+    <button idMso="DataRefreshAll"/>
+   </documentControls>
+</qat>
+
+<!-- *** TAG OFFICEMENU ***-->
+
+<officeMenu>
+<button idMso="FileNewDatabase" visible = "false"/>
+<button idMso="FileOpenDatabase" visible = "false"/>
+<splitButton idMso="FileSaveAsMenuAccess" visible = "false"/>
+<button idMso="FileCloseDatabase" visible = "false"/>
+<menu idMso="FileManageMenu" visible = "false"/>
+</officeMenu>
+
+    <tabs>
+      <!-- *** GUIA PRINCIPAL ***-->
+      <tab id = "GuiaPrincipal" label = "Principal">
+
+        <group id="grpCadastros" label="Cadastros">
+
+          <!-- *** Menu Clientes ***-->
+          <menu id="MenuCliente" label="Clientes" imageMso ="AddOrRemoveAttendees" itemSize="large" size="large" >
+            <button id="NovoCliente"
+            label="Novo Cliente"
+            onAction="Menu.NovoCliente"
+            imageMso="AddOrRemoveAttendees"
+            description="Adicione ou edite os dados do cliente."/>
+            <button id="ListarClientes"
+             label="Listar Clientes"
+             onAction="Menu.ListarClientes"
+             image="report_user.png"
+             description="Exibe a lista de todos os clientes, com resumo de campos de fácil acesso."/>
+          </menu>
+
+          <!-- *** Grupo Fornecedores ***-->
+          <menu id="MenuFornecedores" label="Fornecedores" image ="Fornecedores.png" itemSize="large" size="large" >
+            <button id="NovoFornecedor" label="Novo Fornecedor" image="Fornecedores.png" onAction="Menu.NovoFornecedor"
+                    description="Adicione ou edite um Fornecedor."/>
+            <button id="ListarFornecedores" label="Listar Fornecedores" image="Fornecedores_list.png" onAction="Menu.ListaFornecedores"
+                    description="Lista todos os fornecedores."/>
+          </menu>
+          <!-- *** Grupo Transportadoras ***-->
+          <menu id="MenuTransportadoras" label="Transportadoras" image ="lorry.png" itemSize="large" size="large" >
+            <button id="NovaTransportadora" label="Novo/Editar" image="lorry_add.png" onAction="Menu.NovaTransportadora"
+                    description="Adicione ou edite uma Transportadorar."/>
+            <button id="ListarTransportadoras" label="Listar Transportadoras" image="lorry_list.png" onAction="Menu.ListarTransportadoras"
+                    description="Liste todas as Transportadoras."/>
+          </menu>
+        </group>
+        <!-- *** Grupo Pedidos e Compras ***-->
+        <group id="grpPedidos" label="Pedidos e Compras">
+          <splitButton id="cmdNovoPedido" size="large" >
+            <menu id="MenuPedidos" image ="package_go.png" itemSize="large" >
+              <button id="NovoPedido" label="Novo Pedido" onAction="Menu.NovoPedido" image="package_go.png" description="Adicione um novo pedido de cliente emitindo comprovante de entrega e faça a vinculação da Nfe."/>
+
+              <button id="NovoPedidoBalcao" label="Novo Pedido Balcão" onAction="Menu.NovoPedidoBalcao" image="balcao.png" description="Adicione um pedido efetuado na loja sem emissão de nota e registro do cliente."/>
+
+              <button id="ListadePedidos" label="Listar Pedidos" onAction="Menu.ListarPedidos" image="package_go_list.png" description="Lista todos os pedidos fechados."/>
+            </menu>
+          </splitButton>
+
+          <splitButton id="cmdNovaCompras" size="large" >
+            <menu id="MenuCompras" image ="package_add.png" itemSize="large" >
+              <button id="NovoCompra" label="Nova Compra" onAction="Menu.NovaCompra" image="package_add.png" supertip="Adicione ou edite uma compra."/>
+              <button id="ListadeCompras" label="Listar Compras" onAction="Menu.ListarCompras" image="package_add_list.png" supertip="Lista todas as compras recebidas e adicionadas ao estoque."/>
+            </menu>
+          </splitButton>
+        </group>
+
+        <!-- *** Grupo Estoque ***-->
+        <group id="grpEstoque" label="Controle do Estoque">
+          <splitButton id="cmdEstoque" size="large" >
+            <menu id="MenuEstoque" image ="package.png" itemSize="large" >
+              <button id="NovoProduto" label="Novo Produto" onAction="Menu.NovoProduto" image="NovoProduto.png" supertip="Adicionar novo produto ao estoque."/>
+              <button id="CategoriaProduto" label="Categoria de Produtos" onAction="Menu.CategoriaProduto" image="Cat_Produto.png" supertip="Adicionar/Editar Categoria de Produtos."/>
+              <button id="ListarEstoque" label="Lista de Estoque" onAction="Menu.ListaEstoque" image="package_estoque.png" supertip="Listar todos os produtos do estoque."/>
+            </menu>
+          </splitButton>
+        </group>
+
+        <!-- *** Grupo Relatorios ***-->
+        <group id="grpRelatoriosGraficos" label="Relatórios e Gráficos" getVisible="fncGetVisible">
+          <menu id="MenuRelatorios" label="Relatórios" imageMso ="ViewsReportView" itemSize="large" size="large">
+            <button id="Cmd10MaioresPedidos"
+                label="10 Maiores Pedidos"
+                imageMso ="ViewsReportView"
+                description="Exibe os dez maiores pedidos."
+                onAction="Menu.DezMaioresPedidos"/>
+
+            <button id="RelatoriosFinanceiros"
+                 label="Relatórios Financeiro"
+                 imageMso="ViewsReportView"
+                 onAction="Menu.RelatoriosFinanceiros"
+                 description="Utilize o formulário para filtrar e gerar os Relatórios Financeiros - Mensal, Trismestral e Anual."/>
+
+            <button id="RelatoriosVendas"
+                 label="Relatórios de Vendas"
+                 imageMso="ViewsReportView"
+                 onAction="Menu.RelatoriosVendas"
+                 description="Utilize o formulário para filtrar e gerar os Relatórios de Vendas - Mensal, Trismestral e Anual."/>
+          </menu>
+          <menu id="MenuGrafico" label="Gráficos" imageMso ="ChartInsert" itemSize="large" size="large">
+            <button id="GraficoFinanceiro"
+                label="Gráfico Financeiro"
+                image="money_dollar.png"
+                onAction="Menu.CaixaGraficoFinanceiro"
+                description="Abra o gráfico e visualize suas receitas e despesas, efetuando filtros anuais, mensais e trimestrais."/>
+          </menu>
+
+
+        </group>
+
+        <!-- *** Grupo Configurações ***-->
+        <group id="grpConfiguracaoBackup" label="Configurações e Backup" getVisible="fncGetVisible">
+          <menu id="MenuConfiguracao" image="configuracao.png" label="Configuração" itemSize="large" size="large">
+            <button id="CmdEmitente" image="configuracao.png"
+              label="Configurações do Emitente"
+              onAction="Menu.ConfigEmitente"
+              description="Dados da Empresa."/>
+            <button id="CmdUsuarios" imageMso="DatabasePermissionsMenu"
+              label="Usuários do Sistema."
+              onAction="Menu.ConfigUsuarios"
+              description="Usuários e Privilégios"/>
+          </menu>
+          <menu id="MenuDb"  label="Banco de Dados" imageMso="FileBackupDatabase" itemSize="large" size="large">
+            <button id="CmdBackupDb"
+                 label="Fazer Backup do Banco de Dados"
+                 imageMso="FileBackupDatabase"
+                 onAction="Menu.BackupDb"
+                 description="Faça backup do banco de dados regularmente  para evitar a perda de dados importantes" />
+            <button idMso="FileCompactAndRepairDatabase" label="Compactar e Reparar" imageMso="FileCompactAndRepairDatabase"
+                    visible="true"/>
+            <button id="btvincular" label="Refazer Vínculos" imageMso="RecurrenceEdit" description="Refazer vínculos com as tabelas"
+                onAction = "fncOnAction"/>
+          </menu>
+        </group>
+        <group id ="grpSair" label="Sair">
+          <button id="BtnFecharSistema" label="Fechar Sistema" imageMso="PrintPreviewClose" onAction="fncOnAction" size="large"/>
+        </group>
+
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>
